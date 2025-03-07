@@ -1,0 +1,28 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      #PGDATA: /data/postgres
+    volumes:
+       - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-network
+    restart: always
+    
+volumes:
+  pgdata:
+    name: postgres-volume
+    #driver: local
+    #driver_opts:
+    #  type: 'bind'
+    #  o: 'bind'
+    #  device: '/mnt/archivos/DB/postgres'
+
+    
+networks:
+  postgres-network:
+    driver: bridge
